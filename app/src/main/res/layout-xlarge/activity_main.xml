@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.yogesh.myapplication.MainActivity">
+
+
+    <Button
+        android:id="@+id/a0"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="0"
+        android:text=" X "
+        android:layout_marginTop="300px"
+        android:layout_marginLeft="90px"/>
+
+    <Button
+        android:id="@+id/a1"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="1"
+        android:text=" X "
+        android:layout_marginTop="300px"/>
+
+
+    <Button
+        android:id="@+id/a2"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="2"
+        android:text=" X "
+        android:layout_marginTop="300px"
+        android:layout_marginRight="90px"/>
+
+    <Button
+        android:id="@+id/a3"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_below="@+id/a0"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="3"
+        android:text=" X "
+        android:layout_marginLeft="90px"/>
+
+    <Button
+        android:id="@+id/a4"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignTop="@+id/a3"
+        android:layout_alignLeft="@+id/a1"
+        android:layout_alignStart="@+id/a1"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="4"
+        android:text=" X "/>
+
+    <Button
+        android:id="@+id/a5"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignTop="@+id/a4"
+        android:layout_alignLeft="@+id/a2"
+        android:layout_alignStart="@+id/a2"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="5"
+        android:text=" X "/>
+
+    <Button
+        android:id="@+id/a6"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_below="@+id/a3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="6"
+        android:text=" X "
+        android:layout_marginLeft="90px"/>
+
+    <Button
+        android:id="@+id/a7"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignTop="@+id/a6"
+        android:layout_alignLeft="@+id/a4"
+        android:layout_alignStart="@+id/a4"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="7"
+        android:text=" X "/>
+
+    <Button
+        android:id="@+id/a8"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_alignTop="@+id/a7"
+        android:layout_alignLeft="@+id/a5"
+        android:layout_alignStart="@+id/a5"
+        android:onClick="checkMyAnswer"
+        android:textSize="25dp"
+        android:tag="8"
+        android:text=" X "/>
+
+    <TextView
+        android:layout_width="700px"
+        android:layout_height="100px"
+        android:layout_below="@+id/a6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/textView1"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:textSize="25dp"
+        android:onClick="startGame"
+        android:text="Are You Ready? Click Me"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:id="@+id/ans2"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:textSize="25dp"
+        android:text=" ? "
+        android:layout_alignBaseline="@+id/ans3"
+        android:layout_alignBottom="@+id/ans3"
+        android:layout_alignLeft="@+id/a1"
+        android:layout_alignStart="@+id/a1"
+        android:background="@color/textBg"/>
+
+
+    <TextView
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:id="@+id/timerBox"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:textSize="15dp"
+        android:textColorHighlight="@color/colorPrimary"
+        android:text="--"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/ans2"
+        android:layout_alignStart="@+id/ans2" />
+
+
+    <TextView
+        android:id="@+id/correctAns"
+        android:layout_width="650px"
+        android:layout_height="150px"
+        android:layout_below="@+id/a6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:visibility="invisible"
+        android:gravity="left"
+        android:text="Correct answer ......"/>
+
+
+
+
+    <TextView
+        android:id="@+id/wrongAns"
+        android:layout_width="650px"
+        android:layout_height="150px"
+        android:layout_below="@+id/correctAns"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:visibility="invisible"
+        android:gravity="left"
+        android:text="Wrong answer ......"/>
+
+
+    <TextView
+        android:id="@+id/bestScore"
+        android:layout_width="650px"
+        android:layout_height="150px"
+        android:layout_below="@+id/wrongAns"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:textSize="15dp" 
+        android:gravity="left"
+        android:text="Best Score..."/>
+
+
+    <TextView
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:id="@+id/ans1"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:textSize="25dp"
+        android:text=" ? "
+        android:layout_alignBaseline="@+id/ans2"
+        android:layout_alignBottom="@+id/ans2"
+        android:layout_alignLeft="@+id/a2"
+        android:layout_alignStart="@+id/a2"
+        android:background="@color/textBg"/>
+
+
+    <TextView
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:id="@+id/ans3"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:textSize="25dp"
+        android:text=" ? "
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/timerBox1"
+        android:layout_alignLeft="@+id/a0"
+        android:layout_alignStart="@+id/a0"
+        android:background="@color/textBg"/>
+
+    <TextView
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:id="@+id/timerBox1"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:textSize="15dp"
+        android:textColorHighlight="@color/colorPrimary"
+        android:text="Timer :"
+        android:layout_alignBottom="@+id/timerBox"
+        android:layout_toLeftOf="@+id/timerBox"
+        android:layout_toStartOf="@+id/timerBox"
+        android:layout_marginBottom="13dp" />
+
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="300px"
+        android:layout_height="150px"
+        android:onClick="restartGame"
+        android:textSize="15dp"
+        android:tag="8"
+        android:textAllCaps="false"
+        android:visibility="invisible"
+        android:text="Restart"
+        android:layout_alignTop="@+id/correctAns"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

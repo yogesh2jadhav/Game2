@@ -1,0 +1,8 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="circlebtn_w">110dp</dimen>
+
+    <dimen name="footerbtn_h">60dp</dimen>
+
+</resources>
