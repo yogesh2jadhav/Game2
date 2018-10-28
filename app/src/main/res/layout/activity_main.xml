@@ -3,9 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
     >
+    <!--LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/MainSplashSreen"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/splash1"/>
+    </LinearLayout-->
 
     <LinearLayout
+        android:id="@+id/MainLinear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/headerbg"
@@ -51,6 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/MainLinear2"
         android:layout_width="match_parent"
         android:background="#ffec00"
         android:layout_height="wrap_content"
@@ -187,6 +200,8 @@
     </LinearLayout>
 
     <LinearLayout
+
+        android:id="@+id/MainLinear3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffc500"
@@ -214,6 +229,8 @@
     </LinearLayout>
 
     <LinearLayout
+
+        android:id="@+id/MainLinear4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -322,6 +339,8 @@
     </LinearLayout>
 
     <LinearLayout
+
+        android:id="@+id/MainLinear5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/keyboarddivider"
@@ -373,4 +392,5 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
 </LinearLayout>
