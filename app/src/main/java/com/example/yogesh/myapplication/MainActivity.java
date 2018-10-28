@@ -41,6 +41,8 @@ public class MainActivity extends Helper {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_main);
+        View v =null;
+        startGame(v);
         Log.d(msg, "########### > The onStart() event");
     }
 

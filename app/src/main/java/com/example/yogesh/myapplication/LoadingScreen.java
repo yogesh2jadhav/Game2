@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -19,7 +21,6 @@ public class LoadingScreen extends Activity {
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +45,12 @@ public class LoadingScreen extends Activity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                RelativeLayout rl = findViewById(R.id.mainLoadingRelativeLayout);
-                rl.setBackground(getResources().getDrawable(R.drawable.splash1));
+                ImageView rl = findViewById(R.id.MainLoadingImg);
+                rl.setImageResource (R.drawable.splash1);
 
-                showSplash();
+                Button startGame = findViewById(R.id.startGame);
+                startGame.setVisibility(View.VISIBLE);
+
                 // close this activity
                // finish();
             }
@@ -55,25 +58,13 @@ public class LoadingScreen extends Activity {
 
     }
 
-    public void showSplash(){
 
-        new Handler().postDelayed(new Runnable() {
 
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
+    public void onSlpashStartGame(View v){
 
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-
-                Intent i = new Intent(LoadingScreen.this, MainActivity.class);
-                startActivity(i);
-                // close this activity
-                finish();
-            }
-        }, 3000);
+        Intent i = new Intent(LoadingScreen.this, MainActivity.class);
+        startActivity(i);
+        // close this activity
+        finish();
     }
 }

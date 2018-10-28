@@ -29,12 +29,12 @@ public class GameTimer extends Helper {
     public GameTimer(Activity myView, MainActivity myMainActivity) {
         this.myView=myView;
         this.myMainActivity=myMainActivity;
-        this.countDown=60000;
+        this.countDown=61000;
     }
 
 
     public void timerInit( ){
-        buttonVisiblity(R.id.startGame,View.GONE, myMainActivity);
+        //buttonVisiblity(R.id.startGame,View.GONE, myMainActivity);
         buttonVisiblity(R.id.restart,View.GONE,myMainActivity);
         startTimer();
     }
