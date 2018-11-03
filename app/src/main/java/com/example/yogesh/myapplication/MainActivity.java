@@ -20,19 +20,14 @@ public class MainActivity extends Helper {
     Map<String, Integer> variablesMap = new Hashtable<>();
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
+    GameTimer gameTimer;
  /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
         createDatabase();
-       // showSplashScreen();
         Log.d(msg, "########### > The onCreate() event");
     }
 
@@ -41,8 +36,6 @@ public class MainActivity extends Helper {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_main);
-        View v =null;
-        startGame(v);
         Log.d(msg, "########### > The onStart() event");
     }
 
@@ -57,6 +50,9 @@ public class MainActivity extends Helper {
     @Override
     protected void onPause() {
         super.onPause();
+        gameOver();
+        if(gameTimer!=null)
+        gameTimer.countDown=0;
         Log.d(msg, "########### >The onPause() event");
     }
 

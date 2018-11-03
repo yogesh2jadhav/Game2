@@ -34,7 +34,7 @@ public class GameTimer extends Helper {
 
 
     public void timerInit( ){
-        //buttonVisiblity(R.id.startGame,View.GONE, myMainActivity);
+        buttonVisiblity(R.id.startGame,View.GONE, myMainActivity);
         buttonVisiblity(R.id.restart,View.GONE,myMainActivity);
         startTimer();
     }

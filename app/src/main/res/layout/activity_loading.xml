@@ -26,7 +26,7 @@
         android:layout_weight="1"
         android:background="@drawable/commonbtn"
         android:onClick="onSlpashStartGame"
-        android:text="Start"
+        android:text="Play"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#fff"
