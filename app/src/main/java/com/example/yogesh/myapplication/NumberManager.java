@@ -30,6 +30,9 @@ class NumberManager extends Helper{
     }
 
     public boolean createAllNumbersArr(){
+        randomNumberArr.clear();
+        visibleNumberArr.clear();
+
         for(int i=0; i<99;i++) {
             randomNumberArr.add(i);
         }
