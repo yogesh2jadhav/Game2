@@ -20,13 +20,14 @@ public class MainActivity extends Helper {
     Map<String, Integer> variablesMap = new Hashtable<>();
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
-    GameTimer gameTimer;
+    GameTimer myTimer;
  /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         createDatabase();
         Log.d(msg, "########### > The onCreate() event");
     }
@@ -51,8 +52,9 @@ public class MainActivity extends Helper {
     protected void onPause() {
         super.onPause();
         gameOver();
-        if(gameTimer!=null)
-        gameTimer.countDown=0;
+        if(myTimer==null)
+            myTimer =  new GameTimer(this, this);
+        myTimer.countDown=0;
         Log.d(msg, "########### >The onPause() event");
     }
 
@@ -74,7 +76,7 @@ public class MainActivity extends Helper {
     public void startGame(View v){
         System.out.println(msg + "Started");
         createDatabase();
-        GameTimer myTimer = new GameTimer(this, this);
+        myTimer = new GameTimer(this, this);
         myTimer.timerInit();
         numberManager = new NumberManager(this, myTimer);
         numberManager.assignNumbers();
