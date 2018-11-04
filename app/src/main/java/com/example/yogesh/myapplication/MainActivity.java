@@ -37,6 +37,11 @@ public class MainActivity extends Helper {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_main);
+        createDatabase();
+        Cursor resultSet = getDataFromDatabase();
+        resultSet.moveToFirst();
+        textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
+
         Log.d(msg, "########### > The onStart() event");
     }
 
@@ -75,17 +80,19 @@ public class MainActivity extends Helper {
 
     public void startGame(View v){
         System.out.println(msg + "Started");
-        createDatabase();
+       // createDatabase();
         myTimer = new GameTimer(this, this);
         myTimer.timerInit();
         numberManager = new NumberManager(this, myTimer);
         numberManager.assignNumbers();
 
-        Cursor resultSet = getDataFromDatabase();
-        resultSet.moveToFirst();
-        textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
+        //Cursor resultSet = getDataFromDatabase();
+        //resultSet.moveToFirst();
+        //textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         textViewVisiblity(R.id.correctAns,View.VISIBLE);
+        textViewShowText(R.id.correctAns,"0");
         textViewVisiblity(R.id.wrongAns,View.VISIBLE);
+        textViewShowText(R.id.wrongAns,"0");
     }
 
 
