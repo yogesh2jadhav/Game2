@@ -2,12 +2,13 @@
 
 buildscript {
     repositories {
+        //Google repo should now always be first
+        google()
         jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
-        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
