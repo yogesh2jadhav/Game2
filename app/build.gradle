@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.example.yogesh.myapplication"
+        applicationId "in.ngsc.sixty"
         //dont go for lower support, onlu increases crashes.
         minSdkVersion 19
         targetSdkVersion 26

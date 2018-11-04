@@ -1,4 +1,4 @@
-package com.example.yogesh.myapplication;
+package in.ngsc.sixty;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import  in.ngsc.sixty.R;
 
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
+
+import in.ngsc.sixty.GameTimer;
+import in.ngsc.sixty.Helper;
+import in.ngsc.sixty.NumberManager;
 
 //https://developers.facebook.com/quickstarts/1597458496947906/?platform=android
 

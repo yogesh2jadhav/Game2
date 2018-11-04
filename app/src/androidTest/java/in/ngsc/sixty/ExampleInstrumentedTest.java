@@ -1,4 +1,4 @@
-package com.example.yogesh.myapplication;
+package in.ngsc.sixty;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.yogesh.myapplication", appContext.getPackageName());
+        assertEquals("in.ngsc.sixty", appContext.getPackageName());
     }
 }

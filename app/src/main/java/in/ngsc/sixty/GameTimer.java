@@ -1,4 +1,4 @@
-package com.example.yogesh.myapplication;
+package in.ngsc.sixty;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import  in.ngsc.sixty.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

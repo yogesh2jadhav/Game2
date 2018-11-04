@@ -1,4 +1,4 @@
-package com.example.yogesh.myapplication;
+package in.ngsc.sixty;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;

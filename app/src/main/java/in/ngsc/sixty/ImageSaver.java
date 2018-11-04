@@ -1,4 +1,4 @@
-package com.example.yogesh.myapplication;
+package in.ngsc.sixty;
 
 import android.content.Context;
 import android.graphics.Bitmap;
