@@ -18,6 +18,20 @@
     </LinearLayout-->
 
     <LinearLayout
+        android:id="@+id/MainLinear0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/helpImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/help01"
+            android:onClick="showHelp"/>
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/MainLinear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

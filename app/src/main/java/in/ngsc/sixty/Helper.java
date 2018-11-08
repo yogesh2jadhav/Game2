@@ -3,6 +3,7 @@ package in.ngsc.sixty;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -14,6 +15,11 @@ public class Helper extends AppCompatActivity {
     public void textViewVisiblity ( Integer id, Integer value){
         TextView textVew= (TextView) findViewById(id);
         textVew.setVisibility(value);
+    }
+
+    public void linearLayoutVisiblity ( Integer id, Integer value){
+        LinearLayout linearLayout= (LinearLayout) findViewById(id);
+        linearLayout.setVisibility(value);
     }
 
     public void textViewShowText( Integer id, String value){

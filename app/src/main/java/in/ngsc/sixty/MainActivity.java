@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import  in.ngsc.sixty.R;
@@ -26,6 +27,7 @@ public class MainActivity extends Helper {
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
     GameTimer myTimer;
+    int helperStatus = 0;
  /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,15 @@ public class MainActivity extends Helper {
         Cursor resultSet = getDataFromDatabase();
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
-
+        if (resultSet.getInt(0)==0){
+            helperStatus=0;
+            linearLayoutVisiblity(R.id.MainLinear0,View.VISIBLE);
+            linearLayoutVisiblity(R.id.MainLinear1,View.GONE);
+            linearLayoutVisiblity(R.id.MainLinear2,View.GONE);
+            linearLayoutVisiblity(R.id.MainLinear3,View.GONE);
+            linearLayoutVisiblity(R.id.MainLinear4,View.GONE);
+            linearLayoutVisiblity(R.id.MainLinear5,View.GONE);
+        }
         Log.d(msg, "########### > The onStart() event");
     }
 
@@ -80,6 +90,26 @@ public class MainActivity extends Helper {
     public void onDestroy() {
         super.onDestroy();
         Log.d(msg, "########### > The onDestroy() event");
+    }
+
+
+    public void showHelp(View v){
+
+        ImageView helpImage = findViewById(R.id.helpImage);
+        String backgroundImageName = String.valueOf(helpImage.getTag());
+        if(helperStatus==0){
+            helpImage.setImageResource(R.drawable.help02);
+            helperStatus=1;
+        }
+        else{
+            linearLayoutVisiblity(R.id.MainLinear0,View.GONE);
+            linearLayoutVisiblity(R.id.MainLinear1,View.VISIBLE);
+            linearLayoutVisiblity(R.id.MainLinear2,View.VISIBLE);
+            linearLayoutVisiblity(R.id.MainLinear3,View.VISIBLE);
+            linearLayoutVisiblity(R.id.MainLinear4,View.VISIBLE);
+            linearLayoutVisiblity(R.id.MainLinear5,View.VISIBLE);
+        }
+
     }
 
 
