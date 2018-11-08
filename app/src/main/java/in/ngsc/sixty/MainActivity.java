@@ -125,6 +125,9 @@ public class MainActivity extends Helper {
 
         saveIntoDatabase(bestScore,bestWrongScore);
 
+        resultSet = getDataFromDatabase();
+        resultSet.moveToFirst();
+        textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
     }
 
