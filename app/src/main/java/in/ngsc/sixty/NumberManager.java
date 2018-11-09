@@ -39,13 +39,14 @@ class NumberManager extends Helper {
             randomNumberArr.add(i);
         }
         Collections.shuffle(randomNumberArr);
-        for(int i=0; i<10;i++) {
+        for(int i=0; i<9;i++) {
             visibleNumberArr.add(randomNumberArr.get(0));
             randomNumberArr.remove(0);
         }
-        answerArr[0]=visibleNumberArr.get(7);
+        /*answerArr[0]=visibleNumberArr.get(7);
         answerArr[1]=visibleNumberArr.get(2);
         answerArr[2]=visibleNumberArr.get(4);
+        */
         Log.d(msg, "randomNumberArrr = "+randomNumberArr.toString());
         return true;
     }
@@ -54,7 +55,6 @@ class NumberManager extends Helper {
         Log.d(msg, "assignNumbers :");
         for(int i = 0; i<=8;i++) {
             buttonShowText("a"+i,visibleNumberArr.get(i).toString(),myActivity);
-
         }
         setNewAnswerButtonTxt(1);
         setNewAnswerButtonTxt(2);
@@ -68,31 +68,34 @@ class NumberManager extends Helper {
         //Log.d(msg, "setNewAnswer : answersList.size :" + answersList.size());
         Log.d(msg,"Answer Array===="+ visibleNumberArr.toString());
         ArrayList<Integer> tempVisibleArr = (ArrayList<Integer>) visibleNumberArr.clone();
-        if(i!=3) {
+        if(tempVisibleArr.contains(answerArr[2]))
             tempVisibleArr.remove(tempVisibleArr.indexOf(answerArr[2]));
-        }
-        if(i!=2){
+        if(tempVisibleArr.contains(answerArr[1]))
             tempVisibleArr.remove(tempVisibleArr.indexOf(answerArr[1]));
-        }
-        if(i!=1) {
+        if(tempVisibleArr.contains(answerArr[0]))
             tempVisibleArr.remove(tempVisibleArr.indexOf(answerArr[0]));
-        }
+
         Log.d(msg,"i="+i+"  Answer Array===="+ tempVisibleArr.toString());
 
         switch(i) {
             case 3:
-                answerArr[2]=tempVisibleArr.get(myRandom.nextInt(6));
+                Collections.shuffle(tempVisibleArr);
+                answerArr[2]=tempVisibleArr.get(0);
                 textViewShowText(R.id.ans3, Integer.toString(answerArr[2]), myActivity);
                 break;
             case 2:
-                answerArr[1]=tempVisibleArr.get(myRandom.nextInt(6));
+                Collections.shuffle(tempVisibleArr);
+                answerArr[1]=tempVisibleArr.get(0);
                 textViewShowText(R.id.ans2, Integer.toString(answerArr[1]), myActivity);
                 break;
             case 1:
-                answerArr[0]=tempVisibleArr.get(myRandom.nextInt(6));
+                Collections.shuffle(tempVisibleArr);
+                answerArr[0]=tempVisibleArr.get(0);
                 textViewShowText(R.id.ans1, Integer.toString(answerArr[0]), myActivity);
                 break;
         }
+        Log.d(msg, "Answer Array ::: answerArr[0]= "+answerArr[0] + " answerArr[1]= "+answerArr[1] + " answerArr[0]= "+answerArr[2]  );
+
     }
 
 
@@ -100,11 +103,12 @@ class NumberManager extends Helper {
         Button answerButton = (Button)v;
         String buttonText = answerButton.getText().toString();
 
-         Log.d(msg, "Check my Answer ==== gameTimer.countDown="+gameTimer.countDown);
         if(gameTimer.countDown<=0)
             return;
         Log.d(msg, "checkMyAnswer : ");
         if(buttonText.equals(Integer.toString(answerArr[0]))){
+            Log.d(msg, "Check my Answer ==== "+answerArr[0]);
+
             int a = Integer.parseInt(answerButton.getTag().toString()) ;
             visibleNumberArr.set(a,randomNumberArr.get(0));
             randomNumberArr.remove(0);
@@ -113,6 +117,8 @@ class NumberManager extends Helper {
             variablesMap.put("correctAns",(int)variablesMap.get("correctAns")+1);
         }
         else if(buttonText.equals(Integer.toString(answerArr[1]))){
+            Log.d(msg, "Check my Answer ==== "+answerArr[1]);
+
             int a = Integer.parseInt(answerButton.getTag().toString()) ;
             visibleNumberArr.set(a,randomNumberArr.get(0));
             randomNumberArr.remove(0);
@@ -121,6 +127,8 @@ class NumberManager extends Helper {
             variablesMap.put("correctAns",(int)variablesMap.get("correctAns")+1);
         }
         else if(buttonText.equals(Integer.toString(answerArr[2]))){
+            Log.d(msg, "Check my Answer ==== "+answerArr[2]);
+
             int a = Integer.parseInt(answerButton.getTag().toString()) ;
             visibleNumberArr.set(a,randomNumberArr.get(0));
             randomNumberArr.remove(0);

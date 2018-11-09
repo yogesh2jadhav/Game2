@@ -53,7 +53,7 @@ public class GameTimer extends Helper {
                 mTimerHandler.post(new Runnable() {
 
                     public void run(){
-                        Log.d(msg, "Timer is started................   ");
+                        //Log.d(msg, "Timer is started................   ");
                         countDown=countDown-1000;
                         progressBar.setProgress((int)Math.ceil(progressInt));
                         progressInt+=1.65;
