@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="textBg">#def9f1be</color>
+    <color name="searchNumber">#e2fde951</color>
+    <color name="orang">#ff9f31</color>
+    <color name="green">#00a859</color>
+
+    <!--header-->
+    <color name="headerbg">#ffc500</color>
+
+</resources>
