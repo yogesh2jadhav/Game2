@@ -1,5 +1,7 @@
 package in.ngsc.sixty;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -182,4 +184,29 @@ public class MainActivity extends Helper {
         mydatabase.execSQL("INSERT INTO TutorialsPoint VALUES("+myCorrectAns+","+myWrongAns+","+currentDate.getTime()+");");
         return getDataFromDatabase();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("Do you wish to quit the game?").setPositiveButton("Yes",dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+    }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                finishAffinity();
+                finish();
+            } else {
+                if(numberManager!=null){
+                    numberManager.shuffleAround();
+                }
+
+            }
+        }
+
+        //super.onBackPressed();
+
+    };
 }
