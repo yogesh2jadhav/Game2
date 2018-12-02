@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+
 import  in.ngsc.sixty.R;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ import java.util.Map;
 import in.ngsc.sixty.GameTimer;
 import in.ngsc.sixty.Helper;
 import in.ngsc.sixty.NumberManager;
+import io.fabric.sdk.android.Fabric;
 
 //https://developers.facebook.com/quickstarts/1597458496947906/?platform=android
 
@@ -34,6 +37,11 @@ public class MainActivity extends Helper {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(!BuildConfig.DEBUG){
+            Fabric.with(this, new Crashlytics());
+        }
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

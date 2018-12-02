@@ -29,6 +29,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b48e7fa7c62148e781a550b3ac4b9cad76318929"
+            />
+
         <!--<provider android:authorities="com.facebook.app.FacebookContentProvider1597458496947906"-->
             <!--android:name="com.facebook.FacebookContentProvider"-->
             <!--android:exported="true"/>-->
