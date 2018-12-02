@@ -1,5 +1,7 @@
 package in.ngsc.sixty;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.crashlytics.android.Crashlytics;
 
 import  in.ngsc.sixty.R;
 
@@ -18,6 +22,7 @@ import java.util.Map;
 import in.ngsc.sixty.GameTimer;
 import in.ngsc.sixty.Helper;
 import in.ngsc.sixty.NumberManager;
+import io.fabric.sdk.android.Fabric;
 
 //https://developers.facebook.com/quickstarts/1597458496947906/?platform=android
 
@@ -32,6 +37,11 @@ public class MainActivity extends Helper {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(!BuildConfig.DEBUG){
+            Fabric.with(this, new Crashlytics());
+        }
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -182,4 +192,29 @@ public class MainActivity extends Helper {
         mydatabase.execSQL("INSERT INTO TutorialsPoint VALUES("+myCorrectAns+","+myWrongAns+","+currentDate.getTime()+");");
         return getDataFromDatabase();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("Do you wish to quit the game?").setPositiveButton("Yes",dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+    }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                finishAffinity();
+                finish();
+            } else {
+                if(numberManager!=null){
+                    numberManager.shuffleAround();
+                }
+
+            }
+        }
+
+        //super.onBackPressed();
+
+    };
 }

@@ -138,10 +138,7 @@ class NumberManager extends Helper {
 
         }
         else{
-            Collections.shuffle(visibleNumberArr);
-            for(int i = 0; i<=8;i++) {
-                buttonShowText("a"+i,visibleNumberArr.get(i).toString(),myActivity);
-            }
+            shuffleAround();
             gameTimer.countDown-=2000;
             gameTimer.progressInt+=1.65*2;
             variablesMap.put("wrongAns", (int)variablesMap.get("wrongAns")+1);
@@ -155,5 +152,12 @@ class NumberManager extends Helper {
 
         Log.d(msg, "End====");
 
+    }
+
+    public void shuffleAround() {
+        Collections.shuffle(visibleNumberArr);
+        for(int i = 0; i<=8;i++) {
+            buttonShowText("a"+i,visibleNumberArr.get(i).toString(),myActivity);
+        }
     }
 }
