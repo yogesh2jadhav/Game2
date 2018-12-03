@@ -1,4 +1,6 @@
 
+.idea/
+.gradle/
 .gradle/4.6/fileChanges/last-build.bin
 .gradle/4.6/fileContent/fileContent.lock
 .gradle/4.6/fileHashes/fileHashes.bin
