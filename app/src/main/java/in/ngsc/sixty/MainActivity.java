@@ -1,14 +1,20 @@
 package in.ngsc.sixty;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -29,6 +35,7 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends Helper {
     String msg = "MainActivity :: ";
     Map<String, Integer> variablesMap = new Hashtable<>();
+    View myActivity;
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
     GameTimer myTimer;
@@ -124,6 +131,7 @@ public class MainActivity extends Helper {
 
 
     public void startGame(View v){
+        myActivity=v;
         System.out.println(msg + "Started");
        // createDatabase();
         myTimer = new GameTimer(this, this);
@@ -169,6 +177,8 @@ public class MainActivity extends Helper {
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
+
+        onButtonShowPopupWindowClick(myActivity);
     }
 
     public void createDatabase(){
@@ -217,4 +227,38 @@ public class MainActivity extends Helper {
         //super.onBackPressed();
 
     };
+
+
+    public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+        TextView scoreCS = findViewById(R.id.correctAns);
+        TextView scoreBS = findViewById(R.id.bestScore);
+        TextView popuptextCS = popupView.findViewById(R.id.showcs);
+        popuptextCS.setText(popuptextCS.getText()+ scoreCS.getText().toString());
+        TextView popuptextBS = popupView.findViewById(R.id.showbs);
+        popuptextBS.setText(popuptextBS.getText()+ scoreBS.getText().toString());
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
 }
