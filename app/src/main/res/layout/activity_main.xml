@@ -6,16 +6,7 @@
     android:orientation="vertical"
     android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
     >
-    <!--LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/MainSplashSreen"
-        android:visibility="gone">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/splash1"/>
-    </LinearLayout-->
+
 
     <LinearLayout
         android:id="@+id/MainLinear0"
@@ -76,7 +67,6 @@
         </RelativeLayout>
 
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/MainLinear2"
         android:layout_width="match_parent"
@@ -213,7 +203,6 @@
         </RelativeLayout>
 
     </LinearLayout>
-
     <LinearLayout
 
         android:id="@+id/MainLinear3"
@@ -242,7 +231,6 @@
 
 
     </LinearLayout>
-
     <LinearLayout
 
         android:id="@+id/MainLinear4"
@@ -352,7 +340,6 @@
 
 
     </LinearLayout>
-
     <LinearLayout
 
         android:id="@+id/MainLinear5"
