@@ -34,7 +34,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends Helper {
     String msg = "MainActivity :: ";
-    Map<String, Integer> variablesMap = new Hashtable<>();
+    Map<String, Integer> variablesMap = new Hashtable();
     View myActivity;
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
@@ -177,8 +177,7 @@ public class MainActivity extends Helper {
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
-
-        onButtonShowPopupWindowClick(myActivity);
+        if(myTimer.countDownInSec<=0) onButtonShowPopupWindowClick(myActivity);
     }
 
     public void createDatabase(){
