@@ -35,7 +35,7 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends Helper {
     String msg = "MainActivity :: ";
-    Map<String, Integer> variablesMap = new Hashtable<>();
+    Map<String, Integer> variablesMap = new Hashtable();
     View myActivity;
     SQLiteDatabase mydatabase;
     NumberManager numberManager;
@@ -178,8 +178,7 @@ public class MainActivity extends Helper {
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
-
-        onButtonShowPopupWindowClick(myActivity);
+        if(myTimer.countDownInSec<=0) onButtonShowPopupWindowClick(myActivity);
     }
 
     public void createDatabase(){
@@ -243,8 +242,8 @@ public class MainActivity extends Helper {
         popuptextBS.setText(String.format("%s%s", popuptextBS.getText(), scoreBS.getText().toString()));
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
