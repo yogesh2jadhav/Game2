@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -232,15 +233,14 @@ public class MainActivity extends Helper {
     public void onButtonShowPopupWindowClick(View view) {
 
         // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)
-                getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_window, null);
         TextView scoreCS = findViewById(R.id.correctAns);
         TextView scoreBS = findViewById(R.id.bestScore);
         TextView popuptextCS = popupView.findViewById(R.id.showcs);
-        popuptextCS.setText(popuptextCS.getText()+ scoreCS.getText().toString());
+        popuptextCS.setText(String.format("%s%s", popuptextCS.getText(), scoreCS.getText().toString()));
         TextView popuptextBS = popupView.findViewById(R.id.showbs);
-        popuptextBS.setText(popuptextBS.getText()+ scoreBS.getText().toString());
+        popuptextBS.setText(String.format("%s%s", popuptextBS.getText(), scoreBS.getText().toString()));
 
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -248,6 +248,9 @@ public class MainActivity extends Helper {
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupWindow.setElevation(2);
+        }
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
