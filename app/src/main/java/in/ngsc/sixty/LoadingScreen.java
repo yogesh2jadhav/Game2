@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import in.ngsc.sixty.R;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class LoadingScreen extends Activity {
 
@@ -19,6 +21,7 @@ public class LoadingScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

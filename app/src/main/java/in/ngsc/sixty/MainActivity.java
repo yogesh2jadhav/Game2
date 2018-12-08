@@ -1,10 +1,9 @@
 package in.ngsc.sixty;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,15 +18,10 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 
-import  in.ngsc.sixty.R;
-
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
-import in.ngsc.sixty.GameTimer;
-import in.ngsc.sixty.Helper;
-import in.ngsc.sixty.NumberManager;
 import io.fabric.sdk.android.Fabric;
 
 //https://developers.facebook.com/quickstarts/1597458496947906/?platform=android
@@ -40,7 +34,9 @@ public class MainActivity extends Helper {
     NumberManager numberManager;
     GameTimer myTimer;
     int helperStatus = 0;
- /** Called when the activity is first created. */
+    PopupWindow scorePopupWindow = null;
+
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +77,9 @@ public class MainActivity extends Helper {
     @Override
     protected void onResume() {
         super.onResume();
+        if(scorePopupWindow !=null && scorePopupWindow.isShowing()){
+            scorePopupWindow.dismiss();
+        }
         Log.d(msg, "########### > The onResume() event");
     }
 
@@ -89,8 +88,9 @@ public class MainActivity extends Helper {
     protected void onPause() {
         super.onPause();
         gameOver();
-        if(myTimer==null)
+        if(myTimer==null){
             myTimer =  new GameTimer(this, this);
+        }
         myTimer.countDown=0;
         Log.d(msg, "########### >The onPause() event");
     }
@@ -177,7 +177,9 @@ public class MainActivity extends Helper {
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
-        if(myTimer.countDownInSec<=0) onButtonShowPopupWindowClick(myActivity);
+        if(myTimer!=null && myTimer.countDownInSec<=0){
+            onButtonShowPopupWindowClick(myActivity);
+        }
     }
 
     public void createDatabase(){
@@ -227,35 +229,37 @@ public class MainActivity extends Helper {
 
     };
 
-
     public void onButtonShowPopupWindowClick(View view) {
 
         // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)
-                getSystemService(LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_window, null);
         TextView scoreCS = findViewById(R.id.correctAns);
         TextView scoreBS = findViewById(R.id.bestScore);
         TextView popuptextCS = popupView.findViewById(R.id.showcs);
-        popuptextCS.setText(popuptextCS.getText()+ scoreCS.getText().toString());
+        popuptextCS.setText(String.format("%s%s", popuptextCS.getText(), scoreCS.getText().toString()));
         TextView popuptextBS = popupView.findViewById(R.id.showbs);
-        popuptextBS.setText(popuptextBS.getText()+ scoreBS.getText().toString());
+        popuptextBS.setText(String.format("%s%s", popuptextBS.getText(), scoreBS.getText().toString()));
 
         // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        scorePopupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            scorePopupWindow.setElevation(2);
+        }
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        scorePopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
 
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
+                scorePopupWindow.dismiss();
                 return true;
             }
         });
