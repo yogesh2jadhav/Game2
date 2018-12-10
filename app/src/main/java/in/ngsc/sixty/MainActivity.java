@@ -87,7 +87,7 @@ public class MainActivity extends Helper {
     @Override
     protected void onPause() {
         super.onPause();
-        gameOver();
+       // gameOver();
         if(myTimer==null){
             myTimer =  new GameTimer(this, this);
         }
@@ -106,6 +106,9 @@ public class MainActivity extends Helper {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(scorePopupWindow !=null && scorePopupWindow.isShowing()){
+            scorePopupWindow.dismiss();
+        }
         Log.d(msg, "########### > The onDestroy() event");
     }
 
