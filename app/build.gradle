@@ -12,7 +12,7 @@ apply plugin: 'io.fabric'
 
 ext.majorVer = 1
 ext.minorVer = 1
-ext.patchVer = 2
+ext.patchVer = 1
 
 project.ext {
 
