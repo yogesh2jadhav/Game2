@@ -10,6 +10,24 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
+ext.majorVer = 1
+ext.minorVer = 1
+ext.patchVer = 1
+
+project.ext {
+
+    appVersion = ext.majorVer + "." + ext.minorVer + "." + ext.patchVer
+    releaseString = appVersion
+
+    //Code if we ever go to jenkins or app center auto build
+    def env = System.getenv()
+    if(env['BUILD_NUMBER'] != null ){
+        releaseString = appVersion + "-" + env['BUILD_NUMBER']
+    } else if(env['APPCENTER_BUILD_ID'] != null){
+        releaseString = appVersion + "-" + env['APPCENTER_BUILD_ID']
+    }
+}
+
 android {
     //Changed to oreo for more compatibility and upgrades
     compileSdkVersion 28
@@ -19,19 +37,79 @@ android {
         //dont go for lower support, onlu increases crashes.
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
+        versionCode 3
         //Keeping XX.YY.ZZZ for better release management.
-        versionName "1.1.1"
+        versionName = appVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
     }
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+
+                    println "******____  " + getReleaseOrdebug()
+
+                    if(getReleaseOrdebug() == "true"){
+                        output.outputFileName = releaseString + "-sxty-release.apk"
+                    }
+                }
+            }
         }
         debug {
-            debuggable true
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    println "******____  " + getReleaseOrdebug()
+                    if(getReleaseOrdebug() == "false") {
+                        output.outputFileName = releaseString + "-sxty-debug.apk"
+                    }
+                }
+            }
         }
+    }
+
+    applicationVariants.all { variant ->
+        println("Iterating variant: " + variant.getName())
+
+        if (variant.getBuildType().isMinifyEnabled()) {
+            variant.assemble.doLast {
+                def mappingFolderUrl = "${project.buildDir.path}/outputs/mapping/"
+
+                if (variant.flavorName) {
+                    mappingFolderUrl += variant.flavorName + "/"
+                }
+
+                if (variant.buildType.name) {
+                    mappingFolderUrl += variant.buildType.name + "/"
+                }
+
+                println "****** ${mappingFolderUrl} ****+++++_____****+++++_____****+++++_____"
+                def mappingFileUrl = mappingFolderUrl + "mapping.txt"
+
+                File mappingFile = file(mappingFileUrl)
+                if (mappingFile.exists()) {
+                    def newFileName = mappingFolderUrl + "mapping_${variant.name}_${versionName}.txt"
+                    mappingFile.renameTo(newFileName)
+                }
+            }
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    aaptOptions
+            {
+                cruncherEnabled = true
+            }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
@@ -51,5 +129,21 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.7@aar') {
         transitive = true;
     }
+}
 
+def getReleaseOrdebug(){
+    def isRelease = "false"
+    List<String> runTasks = gradle.startParameter.getTaskNames()
+    for (String item : runTasks) {
+        println "****** ${item}"
+        if (item.contains("generateReleaseSources") || item.contains(":app:assembleRelease") || item.contains("assembleRelease") || item.contains(":app:assembleRelease") || item.contains("assemblerelease") ) {
+            isRelease = "true"
+        } else if (item.contains("generateDebugSources") || item.contains(":app:assembleDebug") || item.contains(":app:assembledebug") || item.contains("assembleDebug") || item.contains("assembledebug"))  {
+            isRelease = "false"
+        }
+
+        println "${isRelease}"
+    }
+
+    return isRelease;
 }

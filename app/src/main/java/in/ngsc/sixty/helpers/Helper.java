@@ -1,4 +1,4 @@
-package in.ngsc.sixty;
+package in.ngsc.sixty.helpers;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;

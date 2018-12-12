@@ -1,4 +1,4 @@
-package in.ngsc.sixty;
+package in.ngsc.sixty.helpers;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import in.ngsc.sixty.MainActivity;
 import  in.ngsc.sixty.R;
 
 import java.util.Timer;
@@ -23,7 +24,8 @@ public class GameTimer extends Helper {
     TimerTask mTt1;
     Timer mTimer1 ;
     android.os.Handler mTimerHandler = new android.os.Handler();
-    int countDownInSec,countDown=0;
+    public int countDownInSec;
+    public int countDown=0;
 
     public GameTimer(){
 

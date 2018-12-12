@@ -22,6 +22,10 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
+import in.ngsc.sixty.database.DbManager;
+import in.ngsc.sixty.helpers.GameTimer;
+import in.ngsc.sixty.helpers.Helper;
+import in.ngsc.sixty.helpers.NumberManager;
 import io.fabric.sdk.android.Fabric;
 
 //https://developers.facebook.com/quickstarts/1597458496947906/?platform=android
@@ -30,7 +34,7 @@ public class MainActivity extends Helper {
     String msg = "MainActivity :: ";
     Map<String, Integer> variablesMap = new Hashtable();
     View myActivity;
-    SQLiteDatabase mydatabase;
+    //SQLiteDatabase mydatabase;
     NumberManager numberManager;
     GameTimer myTimer;
     int helperStatus = 0;
@@ -48,7 +52,7 @@ public class MainActivity extends Helper {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        createDatabase();
+//        createDatabase();
         Log.d(msg, "########### > The onCreate() event");
     }
 
@@ -57,7 +61,7 @@ public class MainActivity extends Helper {
     protected void onStart() {
         super.onStart();
         setContentView(R.layout.activity_main);
-        createDatabase();
+//        createDatabase();
         Cursor resultSet = getDataFromDatabase();
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
@@ -185,25 +189,19 @@ public class MainActivity extends Helper {
         }
     }
 
-    public void createDatabase(){
-        mydatabase = openOrCreateDatabase("myAppDb",MODE_PRIVATE,null);
-        Date currentDate = new Date();
-        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS TutorialsPoint(correctAnswers INT,wrongAnswer INT, createdDate DATE);");
-        mydatabase.execSQL("INSERT INTO TutorialsPoint VALUES(0,0,"+currentDate.getTime()+");");
-    }
 
 
     public Cursor getDataFromDatabase(){
-        Cursor resultSet = mydatabase.rawQuery("Select * from TutorialsPoint",null);
+        Cursor resultSet = getMydbConnection().rawQuery("Select * from TutorialsPoint",null);
         return resultSet;
     }
 
     public Cursor saveIntoDatabase(int correctAns, int wrongAns){
         int myCorrectAns = correctAns;
         int myWrongAns = wrongAns;
-        mydatabase.execSQL("delete from TutorialsPoint");
+        getMydbConnection().execSQL("delete from TutorialsPoint");
         Date currentDate = new Date();
-        mydatabase.execSQL("INSERT INTO TutorialsPoint VALUES("+myCorrectAns+","+myWrongAns+","+currentDate.getTime()+");");
+        getMydbConnection().execSQL("INSERT INTO TutorialsPoint VALUES("+myCorrectAns+","+myWrongAns+","+currentDate.getTime()+");");
         return getDataFromDatabase();
     }
 
@@ -266,5 +264,9 @@ public class MainActivity extends Helper {
                 return true;
             }
         });
+    }
+
+    private SQLiteDatabase getMydbConnection(){
+        return DbManager.getInstance(this).getWritableDatabase();
     }
 }
