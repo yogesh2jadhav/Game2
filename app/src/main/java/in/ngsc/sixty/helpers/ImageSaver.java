@@ -1,4 +1,4 @@
-package in.ngsc.sixty;
+package in.ngsc.sixty.helpers;
 
 import android.content.Context;
 import android.graphics.Bitmap;

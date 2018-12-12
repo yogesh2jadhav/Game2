@@ -1,4 +1,4 @@
-package in.ngsc.sixty;
+package in.ngsc.sixty.UI;
 
 
 import android.app.Activity;
@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import in.ngsc.sixty.MainActivity;
 import in.ngsc.sixty.R;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;

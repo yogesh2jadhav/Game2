@@ -1,4 +1,4 @@
-package in.ngsc.sixty;
+package in.ngsc.sixty.helpers;
 
 import android.app.Activity;
 import android.os.Vibrator;
@@ -14,7 +14,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
 
-class NumberManager extends Helper {
+public class NumberManager extends Helper {
     private String msg = "NumberManager Class ::";
     Activity myActivity;
     public ArrayList<Integer> randomNumberArr=new ArrayList<>();
