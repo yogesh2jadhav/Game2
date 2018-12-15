@@ -17,6 +17,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
+import com.crashlytics.android.answers.LevelEndEvent;
 
 import java.util.Date;
 import java.util.Hashtable;
@@ -182,13 +185,20 @@ public class MainActivity extends Helper {
 
         resultSet = getDataFromDatabase();
         resultSet.moveToFirst();
-        textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
+
+        int overallBestScore = resultSet.getInt(0);
+        textViewShowText(R.id.bestScore,""+overallBestScore);
+
+        Answers.getInstance().logLevelEnd(new LevelEndEvent()
+                .putLevelName("Level 1")
+                .putScore(bestScore)
+                .putSuccess(true));
+
         Log.d(msg, "I am back to main activity.... ");
         if(myTimer!=null && myTimer.countDownInSec<=0 && !this.isFinishing() && !this.isDestroyed() ){
             onButtonShowPopupWindowClick(myActivity);
         }
     }
-
 
 
     public Cursor getDataFromDatabase(){
