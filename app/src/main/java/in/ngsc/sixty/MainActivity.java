@@ -184,7 +184,7 @@ public class MainActivity extends Helper {
         resultSet.moveToFirst();
         textViewShowText(R.id.bestScore,""+resultSet.getInt(0));
         Log.d(msg, "I am back to main activity.... ");
-        if(myTimer!=null && myTimer.countDownInSec<=0){
+        if(myTimer!=null && myTimer.countDownInSec<=0 && !this.isFinishing() && !this.isDestroyed() ){
             onButtonShowPopupWindowClick(myActivity);
         }
     }
@@ -232,6 +232,9 @@ public class MainActivity extends Helper {
 
     public void onButtonShowPopupWindowClick(View view) {
 
+        if(this.isFinishing() || this.isDestroyed()){
+            return;
+        }
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_window, null);
