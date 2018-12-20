@@ -1,8 +1,10 @@
 package in.ngsc.sixty;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -275,6 +277,22 @@ public class MainActivity extends Helper {
         TextView popuptextBS = popupView.findViewById(R.id.showbs);
         popuptextBS.setText(String.format("%s%s", popuptextBS.getText(), scoreBS.getText().toString()));
 
+        ImageView shareButton = popupView.findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchScoreSharingUtil();
+            }
+        });
+
+        ImageView exitButton = popupView.findViewById(R.id.exitButton);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scorePopupWindow.dismiss();
+            }
+        });
+
         // create the popup window
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -310,59 +328,17 @@ public class MainActivity extends Helper {
 //        });
     }
 
-    //    public void onButtonShowPopupWindowClick(View view) {
-//
-//        if(this.isFinishing() || this.isDestroyed()){
-//            return;
-//        }
-//        // inflate the layout of the popup window
-//        //LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-//        //View popupView = inflater.inflate(R.layout.popup_window, null);
-//        FrameLayout bottomLayout = findViewById(R.id.popupScore);
-//        view.inflate(this, R.layout.popup_window, bottomLayout);
-//        TextView scoreCS = findViewById(R.id.correctAns);
-//        TextView scoreBS = findViewById(R.id.bestScore);
-//        TextView popuptextCS = findViewById(R.id.showcs);
-//        popuptextCS.setText(String.format("%s%s", popuptextCS.getText(), scoreCS.getText().toString()));
-//        TextView popuptextBS = findViewById(R.id.showbs);
-//        popuptextBS.setText(String.format("%s%s", popuptextBS.getText(), scoreBS.getText().toString()));
-//
-//        // create the popup window
-//        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-//        int height = LinearLayout.LayoutParams.MATCH_PARENT;
-//        boolean focusable = true; // lets taps outside the popup also dismiss it
-//
-//        Animation bottomUp = AnimationUtils.loadAnimation(this,R.anim.bottom_up);
-//
-//
-//        bottomLayout.startAnimation(bottomUp);
-//
-//
-////        hiddenPanel.startAnimation(bottomDown);
-////        hiddenPanel.setVisibility(View.INVISIBLE);
-////        isPanelShown = false;
-//
-////        scorePopupWindow = new PopupWindow(popupView, width, height, focusable);
-////
-////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-////            scorePopupWindow.setElevation(2);
-////        }
-////        // show the popup window
-////        // which view you pass in doesn't matter, it is only used for the window tolken
-////        scorePopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-////
-////
-////        // dismiss the popup window when touched
-////        popupView.setOnTouchListener(new View.OnTouchListener() {
-////            @Override
-////            public boolean onTouch(View v, MotionEvent event) {
-////                scorePopupWindow.dismiss();
-////                return true;
-////            }
-////        });
-//    }
-//
-//
+    private void launchScoreSharingUtil() {
+
+        final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=in.ngsc.sixty");
+//        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+//        intent.setType("image/png");
+        startActivity(Intent.createChooser(intent, "Share image via"));
+
+    }
+
     private SQLiteDatabase getMydbConnection() {
         return DbManager.getInstance(this).getWritableDatabase();
     }
