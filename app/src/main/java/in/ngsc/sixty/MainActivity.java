@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.LevelEndEvent;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Date;
 import java.util.Hashtable;
@@ -256,6 +258,8 @@ public class MainActivity extends Helper {
 
     };
 
+    private AdView mAdView;
+
     public void onButtonShowPopupWindowClick(View view) {
 
         if (this.isFinishing() || this.isDestroyed()) {
@@ -275,14 +279,23 @@ public class MainActivity extends Helper {
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.MATCH_PARENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
+        mAdView = popupView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         scorePopupWindow = new PopupWindow(popupView, width, height, focusable);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             scorePopupWindow.setElevation(2);
         }
+
+        scorePopupWindow.setAnimationStyle(R.anim.bottom_up);
+        scorePopupWindow.setFocusable(true);
+        scorePopupWindow.setOutsideTouchable(true);
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         scorePopupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
 
 //
 //        // dismiss the popup window when touched

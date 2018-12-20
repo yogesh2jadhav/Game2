@@ -41,6 +41,10 @@
         <!-- android:name="com.facebook.FacebookContentProvider" -->
         <!-- android:exported="true"/> -->
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9161649474229173~9330336593"/>
+
     </application>
 
 </manifest>
