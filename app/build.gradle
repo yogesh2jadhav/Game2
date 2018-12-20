@@ -21,9 +21,9 @@ project.ext {
 
     //Code if we ever go to jenkins or app center auto build
     def env = System.getenv()
-    if(env['BUILD_NUMBER'] != null ){
+    if (env['BUILD_NUMBER'] != null) {
         releaseString = appVersion + "-" + env['BUILD_NUMBER']
-    } else if(env['APPCENTER_BUILD_ID'] != null){
+    } else if (env['APPCENTER_BUILD_ID'] != null) {
         releaseString = appVersion + "-" + env['APPCENTER_BUILD_ID']
     }
 }
@@ -54,7 +54,7 @@ android {
 
                     println "******____  " + getReleaseOrdebug()
 
-                    if(getReleaseOrdebug() == "true"){
+                    if (getReleaseOrdebug() == "true") {
                         output.outputFileName = releaseString + "-sxty-release.apk"
                     }
                 }
@@ -64,7 +64,7 @@ android {
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     println "******____  " + getReleaseOrdebug()
-                    if(getReleaseOrdebug() == "false") {
+                    if (getReleaseOrdebug() == "false") {
                         output.outputFileName = releaseString + "-sxty-debug.apk"
                     }
                 }
@@ -121,6 +121,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //implementation 'com.facebook.android:facebook-android-sdk:4.30.0'
+    implementation 'com.google.android.gms:play-services-ads:17.1.2'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -131,14 +132,14 @@ dependencies {
     }
 }
 
-def getReleaseOrdebug(){
+def getReleaseOrdebug() {
     def isRelease = "false"
     List<String> runTasks = gradle.startParameter.getTaskNames()
     for (String item : runTasks) {
         println "****** ${item}"
-        if (item.contains("generateReleaseSources") || item.contains(":app:assembleRelease") || item.contains("assembleRelease") || item.contains(":app:assembleRelease") || item.contains("assemblerelease") ) {
+        if (item.contains("generateReleaseSources") || item.contains(":app:assembleRelease") || item.contains("assembleRelease") || item.contains(":app:assembleRelease") || item.contains("assemblerelease")) {
             isRelease = "true"
-        } else if (item.contains("generateDebugSources") || item.contains(":app:assembleDebug") || item.contains(":app:assembledebug") || item.contains("assembleDebug") || item.contains("assembledebug"))  {
+        } else if (item.contains("generateDebugSources") || item.contains(":app:assembleDebug") || item.contains(":app:assembledebug") || item.contains("assembleDebug") || item.contains("assembledebug")) {
             isRelease = "false"
         }
 

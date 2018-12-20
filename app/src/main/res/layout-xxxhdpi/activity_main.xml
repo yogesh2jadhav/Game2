@@ -408,5 +408,8 @@
             android:visibility="gone" />
 
     </LinearLayout>
-
+    <FrameLayout
+        android:id="@+id/popupScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></FrameLayout>
 </LinearLayout>

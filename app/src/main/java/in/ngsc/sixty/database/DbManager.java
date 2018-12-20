@@ -26,11 +26,38 @@ public class DbManager extends SQLiteOpenHelper {
 
     private Context mContext;
 
+    private DbManager(Context context) {
+        super(context, DbName, null, DbVersion);
+    }
+
+    public static synchronized DbManager getInstance(Context context) throws SQLiteException {
+        if (sInstance == null) {
+
+            sInstance = new DbManager(context);
+            sSqliteDatabase = getWriteableDatabse();
+            if (sSqliteDatabase != null) {
+                sSqliteDatabase.enableWriteAheadLogging();
+            }
+        }
+        if (sSqliteDatabase == null) {
+            sSqliteDatabase = getWriteableDatabse();
+            if (sSqliteDatabase != null) {
+                sSqliteDatabase.enableWriteAheadLogging();
+            }
+        }
+
+        return sInstance;
+    }
+
+    private static SQLiteDatabase getWriteableDatabse() {
+        return sInstance.getWritableDatabase();
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS TutorialsPoint(correctAnswers INT,wrongAnswer INT, createdDate DATE);");
         Date currentDate = new Date();
-        db.execSQL("INSERT INTO TutorialsPoint VALUES(0,0,"+currentDate.getTime()+");");
+        db.execSQL("INSERT INTO TutorialsPoint VALUES(0,0," + currentDate.getTime() + ");");
     }
 
     @Override
@@ -46,33 +73,6 @@ public class DbManager extends SQLiteOpenHelper {
             }
             versionCounter++;
         }
-    }
-
-    private DbManager(Context context) {
-        super(context, DbName, null, DbVersion);
-    }
-
-    public static synchronized DbManager getInstance(Context context) throws SQLiteException {
-        if (sInstance == null) {
-
-            sInstance = new DbManager(context);
-            sSqliteDatabase = getWriteableDatabse();
-            if(sSqliteDatabase!=null) {
-                sSqliteDatabase.enableWriteAheadLogging();
-            }
-        }
-        if (sSqliteDatabase == null) {
-            sSqliteDatabase = getWriteableDatabse();
-            if(sSqliteDatabase!=null) {
-                sSqliteDatabase.enableWriteAheadLogging();
-            }
-        }
-
-        return sInstance;
-    }
-
-    private static SQLiteDatabase getWriteableDatabse() {
-        return sInstance.getWritableDatabase();
     }
 
     public synchronized long executeQuery(ArrayList<? extends ExecuteQuery> commands) {

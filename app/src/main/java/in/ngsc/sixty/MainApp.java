@@ -2,8 +2,6 @@ package in.ngsc.sixty;
 
 import android.app.Application;
 
-import java.util.Date;
-
 import in.ngsc.sixty.database.DbManager;
 
 public class MainApp extends Application {
@@ -15,7 +13,7 @@ public class MainApp extends Application {
         createDatabase();
     }
 
-    private void createDatabase(){
+    private void createDatabase() {
         DbManager.getInstance(this);
 
     }

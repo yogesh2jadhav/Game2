@@ -373,7 +373,7 @@
             android:layout_weight="1"
             android:background="@drawable/commonbtn"
             android:onClick="startGame"
-            android:text="Start Game"
+            android:text="@string/start_game"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="#fff"
@@ -387,7 +387,7 @@
             android:layout_weight="1"
             android:background="@drawable/commonbtn"
             android:onClick="restartGame"
-            android:text="Restart Game"
+            android:text="@string/restart_game"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="#fff"
@@ -396,4 +396,8 @@
 
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/popupScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></FrameLayout>
 </LinearLayout>

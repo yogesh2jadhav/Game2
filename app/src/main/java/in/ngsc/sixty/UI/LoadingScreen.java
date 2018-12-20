@@ -10,15 +10,17 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
+
 import in.ngsc.sixty.MainActivity;
 import in.ngsc.sixty.R;
-import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
 public class LoadingScreen extends Activity {
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,21 +44,20 @@ public class LoadingScreen extends Activity {
                 // This method will be executed once the timer is over
                 // Start your app main activity
                 ImageView rl = findViewById(R.id.MainLoadingImg);
-                rl.setImageResource (R.drawable.splash1);
+                rl.setImageResource(R.drawable.splash1);
 
                 Button startGame = findViewById(R.id.startGame);
                 startGame.setVisibility(View.VISIBLE);
 
                 // close this activity
-               // finish();
+                // finish();
             }
         }, SPLASH_TIME_OUT);
 
     }
 
 
-
-    public void onSlpashStartGame(View v){
+    public void onSlpashStartGame(View v) {
 
         Intent i = new Intent(LoadingScreen.this, MainActivity.class);
         startActivity(i);

@@ -13,8 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
-        * Created by Ilya Gazman on 3/6/2016.
-        */
+ * Created by Ilya Gazman on 3/6/2016.
+ */
 public class ImageSaver {
 
     private String directoryName = "images";
@@ -24,6 +24,17 @@ public class ImageSaver {
 
     public ImageSaver(Context context) {
         this.context = context;
+    }
+
+    public static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    public static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
     public ImageSaver setFileName(String fileName) {
@@ -62,10 +73,9 @@ public class ImageSaver {
     @NonNull
     private File createFile() {
         File directory;
-        if(external){
+        if (external) {
             directory = getAlbumStorageDir(directoryName);
-        }
-        else {
+        } else {
             directory = context.getDir(directoryName, Context.MODE_PRIVATE);
         }
 
@@ -79,17 +89,6 @@ public class ImageSaver {
             Log.e("ImageSaver", "Directory not created");
         }
         return file;
-    }
-
-    public static boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(state);
-    }
-
-    public static boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
     public Bitmap load() {

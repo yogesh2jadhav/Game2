@@ -12,43 +12,43 @@ import android.widget.TextView;
 
 public class Helper extends AppCompatActivity {
 
-    public void textViewVisiblity ( Integer id, Integer value){
-        TextView textVew= (TextView) findViewById(id);
+    public void textViewVisiblity(Integer id, Integer value) {
+        TextView textVew = (TextView) findViewById(id);
         textVew.setVisibility(value);
     }
 
-    public void linearLayoutVisiblity ( Integer id, Integer value){
-        LinearLayout linearLayout= (LinearLayout) findViewById(id);
+    public void linearLayoutVisiblity(Integer id, Integer value) {
+        LinearLayout linearLayout = (LinearLayout) findViewById(id);
         linearLayout.setVisibility(value);
     }
 
-    public void textViewShowText( Integer id, String value){
-        TextView textVew= (TextView) findViewById(id);
+    public void textViewShowText(Integer id, String value) {
+        TextView textVew = (TextView) findViewById(id);
         textVew.setText(value);
     }
 
-    public void textViewShowText( Integer id, String value, Activity myActivity){
-        TextView textVew= (TextView) myActivity.findViewById(id);
+    public void textViewShowText(Integer id, String value, Activity myActivity) {
+        TextView textVew = (TextView) myActivity.findViewById(id);
         textVew.setText(value);
     }
 
-    public void buttonVisiblity(Integer id, Integer value){
-        Button button= (Button) findViewById(id);
+    public void buttonVisiblity(Integer id, Integer value) {
+        Button button = (Button) findViewById(id);
         button.setVisibility(value);
     }
 
-    public void buttonVisiblity(Integer id, Integer value, Activity myActivity){
-        Button button= (Button) myActivity.findViewById(id);
+    public void buttonVisiblity(Integer id, Integer value, Activity myActivity) {
+        Button button = (Button) myActivity.findViewById(id);
         button.setVisibility(value);
     }
 
-    public void buttonShowText( Integer id, String value){
-        Button button= (Button) findViewById(id);
+    public void buttonShowText(Integer id, String value) {
+        Button button = (Button) findViewById(id);
         button.setText(value);
     }
 
 
-    public void buttonShowText( String id, String value){
+    public void buttonShowText(String id, String value) {
 
         int resID = getResources().getIdentifier(id, "id", getPackageName());
         Button myButton = (Button) findViewById(resID);
@@ -56,7 +56,7 @@ public class Helper extends AppCompatActivity {
 
     }
 
-    public void buttonShowText( String id, String value, Activity myActivity){
+    public void buttonShowText(String id, String value, Activity myActivity) {
 
         int resID = myActivity.getResources().getIdentifier(id, "id", myActivity.getPackageName());
         Button myButton = (Button) myActivity.findViewById(resID);

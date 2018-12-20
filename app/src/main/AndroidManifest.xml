@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.ngsc.sixty">
-     <uses-permission android:name="android.permission.VIBRATE"/>
-     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -14,29 +15,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>-->
+
+        <!-- <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/> -->
         <activity
-            android:name="in.ngsc.sixty.UI.LoadingScreen"
+            android:name=".UI.LoadingScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="in.ngsc.sixty.MainActivity"  android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="b48e7fa7c62148e781a550b3ac4b9cad76318929"
-            />
+            android:value="b48e7fa7c62148e781a550b3ac4b9cad76318929" />
 
-        <!--<provider android:authorities="com.facebook.app.FacebookContentProvider1597458496947906"-->
-            <!--android:name="com.facebook.FacebookContentProvider"-->
-            <!--android:exported="true"/>-->
+        <!-- <provider android:authorities="com.facebook.app.FacebookContentProvider1597458496947906" -->
+        <!-- android:name="com.facebook.FacebookContentProvider" -->
+        <!-- android:exported="true"/> -->
+
     </application>
 
 </manifest>
